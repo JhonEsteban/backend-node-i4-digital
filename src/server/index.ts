@@ -1,7 +1,9 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 
-import { userRoutes, postRoutes } from '../routes';
+import { userRoutes, postRoutes, requestRoutes } from '../routes';
+
+import connectToDataBase from '../database';
 
 class Server {
   private app: Application;
@@ -15,6 +17,8 @@ class Server {
 
     this.setMiddlewares();
     this.setRoutes();
+
+    connectToDataBase();
   }
 
   setMiddlewares(): void {
@@ -26,6 +30,7 @@ class Server {
   setRoutes(): void {
     this.app.use(`${this.apiBase}/users`, userRoutes);
     this.app.use(`${this.apiBase}/posts`, postRoutes);
+    this.app.use(`${this.apiBase}/requests`, requestRoutes);
   }
 
   run(): void {
