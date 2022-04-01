@@ -49,11 +49,14 @@ const downloadRequestsInExcelFile = async (req: Request, res: Response) => {
 
   try {
     const requests = await requestDataService.getAllRequests();
-    await excelFileService.createFile(requests);
+    const file = await excelFileService.createFile(requests);
 
-    res.json({ message: 'Excel file created' });
+    res.json({
+      file,
+      format: 'base64',
+    });
   } catch (error) {
-    res.json({ error });
+    res.status(statusCode.internalServerError).json({ error });
   }
 };
 

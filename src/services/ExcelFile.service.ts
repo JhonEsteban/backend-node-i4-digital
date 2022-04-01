@@ -1,5 +1,7 @@
 import exceljs from 'exceljs';
 
+import fs from 'fs';
+
 import { IRequestData } from '../models/RequestData';
 
 class ExcelFileService {
@@ -58,11 +60,25 @@ class ExcelFileService {
     this.createSecondSheet(requests);
   }
 
+  getCreatedExcelFile() {
+    const excelFiles = fs.readdirSync('./src/files');
+    const currentExcelFile = excelFiles[excelFiles.length - 1];
+
+    return currentExcelFile;
+  }
+
+  getExcelFileInFormatBase64() {
+    const currentExcelFile = this.getCreatedExcelFile();
+    return Buffer.from(currentExcelFile).toString('base64');
+  }
+
   async createFile(requests: IRequestData[]) {
     this.setFileConfiguration(requests);
 
     try {
       await this.workbook.xlsx.writeFile(this.path);
+
+      return this.getExcelFileInFormatBase64();
 
       /* eslint no-console: "off" */
       console.log('The file was successfully created!');
