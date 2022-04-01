@@ -17,7 +17,7 @@ class ExcelFileService {
     this.workbook = new exceljs.Workbook();
   }
 
-  setColumnsFirstSheet() {
+  private setColumnsFirstSheet() {
     const columns = [
       { header: 'Id', key: 'id' },
       { header: 'Method Used', key: 'methodUsed' },
@@ -28,16 +28,16 @@ class ExcelFileService {
     return columns;
   }
 
-  setColumnsSecondSheet() {
+  private setColumnsSecondSheet() {
     const columns = [{ header: 'Data Returned', key: 'dataReturned' }];
     return columns;
   }
 
-  setSheet(sheetName: string) {
+  private setSheet(sheetName: string) {
     return this.workbook.addWorksheet(sheetName);
   }
 
-  createFirstSheet(requests: IRequestData[]) {
+  private createFirstSheet(requests: IRequestData[]) {
     const columns = this.setColumnsFirstSheet();
     const sheet = this.setSheet('request-header');
 
@@ -45,7 +45,7 @@ class ExcelFileService {
     sheet.addRows(requests);
   }
 
-  createSecondSheet(requests: IRequestData[]) {
+  private createSecondSheet(requests: IRequestData[]) {
     const dataReturned = requests.map((request) => request.dataReturned);
 
     const columns = this.setColumnsSecondSheet();
@@ -55,33 +55,33 @@ class ExcelFileService {
     sheet.addRows(dataReturned);
   }
 
-  setFileConfiguration(requests: IRequestData[]) {
+  private setFileConfiguration(requests: IRequestData[]) {
     this.createFirstSheet(requests);
     this.createSecondSheet(requests);
   }
 
-  getCreatedExcelFile() {
+  private getCreatedExcelFile() {
     const excelFiles = fs.readdirSync('./src/files');
     const currentExcelFile = excelFiles[excelFiles.length - 1];
 
     return currentExcelFile;
   }
 
-  getExcelFileInFormatBase64() {
+  private getExcelFileInFormatBase64() {
     const currentExcelFile = this.getCreatedExcelFile();
     return Buffer.from(currentExcelFile).toString('base64');
   }
 
-  async createFile(requests: IRequestData[]) {
+  public async createFile(requests: IRequestData[]) {
     this.setFileConfiguration(requests);
 
     try {
       await this.workbook.xlsx.writeFile(this.path);
 
-      return this.getExcelFileInFormatBase64();
-
       /* eslint no-console: "off" */
       console.log('The file was successfully created!');
+
+      return this.getExcelFileInFormatBase64();
     } catch (error) {
       /* eslint no-console: "off" */
       console.log(error);

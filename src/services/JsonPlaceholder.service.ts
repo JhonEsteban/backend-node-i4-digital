@@ -17,7 +17,7 @@ class JsonPlaceholderService {
     this.requestDataService = new RequestDataservice();
   }
 
-  async getAllUsers() {
+  public async getAllUsers() {
     const response = await axios(`${this.apiBase}/users`);
 
     await this.requestDataService.saveRequest(
@@ -28,7 +28,7 @@ class JsonPlaceholderService {
     return response;
   }
 
-  async getAllPosts() {
+  public async getAllPosts() {
     const response = await axios(`${this.apiBase}/posts`);
 
     await this.requestDataService.saveRequest(
@@ -39,7 +39,7 @@ class JsonPlaceholderService {
     return response;
   }
 
-  async getPhotosByUserId(userId: string) {
+  public async getPhotosByUserId(userId: string) {
     const response = await axios(`${this.apiBase}/photos?albumId=${userId}`);
 
     await this.requestDataService.saveRequest(

@@ -21,19 +21,19 @@ class Server {
     connectToDataBase();
   }
 
-  setMiddlewares(): void {
+  private setMiddlewares(): void {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(cors());
   }
 
-  setRoutes(): void {
+  private setRoutes(): void {
     this.app.use(`${this.apiBase}/users`, userRoutes);
     this.app.use(`${this.apiBase}/posts`, postRoutes);
     this.app.use(`${this.apiBase}/requests`, requestRoutes);
   }
 
-  run(): void {
+  public run(): void {
     this.app.listen(this.port, () => {
       /* eslint no-console: "off" */
       console.log(`Server running on port ${this.port}`);
