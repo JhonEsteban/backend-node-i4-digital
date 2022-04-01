@@ -11,11 +11,14 @@ import {
   getAllRequests,
   updateRequestById,
   deleteRequestById,
+  downloadRequestsInExcelFile,
 } from '../controllers/request.controller';
 
 const router = Router();
 
 router.get('/', getAllRequests);
+
+router.get('/download', downloadRequestsInExcelFile);
 
 router.put(
   '/:id',

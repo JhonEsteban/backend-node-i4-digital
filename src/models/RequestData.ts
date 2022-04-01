@@ -1,4 +1,11 @@
-import { Schema, model } from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
+
+export interface IRequestData extends mongoose.Document {
+  methodUsed: string;
+  dataReturned: [];
+  createdAt: Date;
+  updateddAt: Date;
+}
 
 const requestDataSchema = new Schema(
   {
@@ -13,7 +20,8 @@ const requestDataSchema = new Schema(
   },
   {
     timestamps: true,
+    versionKey: false,
   }
 );
 
-export default model('request', requestDataSchema);
+export default model<IRequestData>('request', requestDataSchema);

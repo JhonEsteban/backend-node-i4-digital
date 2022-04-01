@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import RequestDataService from '../services/RequestData.service';
+import { RequestDataService, ExcelFileService } from '../services';
 
 import statusCode from '../statusCode';
 
@@ -44,4 +44,22 @@ const deleteRequestById = async (req: Request, res: Response) => {
   }
 };
 
-export { getAllRequests, updateRequestById, deleteRequestById };
+const downloadRequestsInExcelFile = async (req: Request, res: Response) => {
+  const excelFileService = new ExcelFileService();
+
+  try {
+    const requests = await requestDataService.getAllRequests();
+    await excelFileService.createFile(requests);
+
+    res.json({ message: 'Excel file created' });
+  } catch (error) {
+    res.json({ error });
+  }
+};
+
+export {
+  getAllRequests,
+  updateRequestById,
+  deleteRequestById,
+  downloadRequestsInExcelFile,
+};

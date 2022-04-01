@@ -1,4 +1,5 @@
 import JsonPlaceholderService from './JsonPlaceholder.service';
-import RequestDataservice from './RequestData.service';
+import RequestDataService from './RequestData.service';
+import ExcelFileService from './ExcelFile.service';
 
-export { JsonPlaceholderService, RequestDataservice };
+export { JsonPlaceholderService, RequestDataService, ExcelFileService };
