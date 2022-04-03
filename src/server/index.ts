@@ -1,11 +1,15 @@
+import express, { Application } from 'express';
+
+import cors from 'cors';
 import http from 'http';
 
-import express, { Application } from 'express';
-import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
+import swaggerJsDoc from 'swagger-jsdoc';
 
-import { userRoutes, postRoutes, requestRoutes } from '../routes';
+import swaggerConfig from '../config/swaggerConfig';
 
 import connectToDataBase from '../database';
+import { userRoutes, postRoutes, requestRoutes } from '../routes';
 
 class Server {
   private app: Application;
@@ -13,6 +17,8 @@ class Server {
 
   private apiBase = '/api/v1';
   private serverApp!: http.Server;
+
+  private swaggerSetup = swaggerJsDoc(swaggerConfig);
 
   constructor() {
     this.app = express();
@@ -46,6 +52,12 @@ class Server {
     this.app.use(`${this.apiBase}/users`, userRoutes);
     this.app.use(`${this.apiBase}/posts`, postRoutes);
     this.app.use(`${this.apiBase}/requests`, requestRoutes);
+
+    this.app.use(
+      `${this.apiBase}/docs`,
+      swaggerUi.serve,
+      swaggerUi.setup(this.swaggerSetup)
+    );
   }
 
   public run(): void {
