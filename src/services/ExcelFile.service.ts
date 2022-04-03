@@ -82,9 +82,8 @@ class ExcelFileService {
       console.log('The file was successfully created!');
 
       return this.getExcelFileInFormatBase64();
-    } catch (error) {
-      /* eslint no-console: "off" */
-      console.log(error);
+    } catch {
+      return 'Error creating excel file';
     }
   }
 }

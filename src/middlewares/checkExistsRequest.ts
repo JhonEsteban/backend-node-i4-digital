@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 import RequestData from '../models/RequestData';
-import statusCode from '../statusCode';
+import statusCode from '../config/statusCode';
 
 const checkExistsRequest = async (
   req: Request,

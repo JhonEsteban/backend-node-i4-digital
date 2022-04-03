@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import mongoose from 'mongoose';
 
-import statusCode from '../statusCode';
+import statusCode from '../config/statusCode';
 
 const validateRequestId = (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;

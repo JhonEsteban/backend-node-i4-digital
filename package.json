@@ -8,7 +8,9 @@
     "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
     "build": "tsc",
     "lint": "eslint . --ext .ts",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "test": "jest --verbose --silent --runInBand",
+    "test:watch": "npm run test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -33,6 +35,8 @@
   "devDependencies": {
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.1",
+    "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
     "eslint": "^8.9.0",
@@ -41,7 +45,10 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.5.1",
     "prettier": "^2.5.1",
+    "supertest": "^6.2.2",
+    "ts-jest": "^27.1.4",
     "tsc-watch": "^4.6.0",
     "typescript": "^4.5.5"
   }

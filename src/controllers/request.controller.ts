@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import { RequestDataService, ExcelFileService } from '../services';
 
-import statusCode from '../statusCode';
+import statusCode from '../config/statusCode';
 
 const requestDataService = new RequestDataService();
 

@@ -1,3 +1,5 @@
+import http from 'http';
+
 import express, { Application } from 'express';
 import cors from 'cors';
 
@@ -10,6 +12,7 @@ class Server {
   private port: string;
 
   private apiBase = '/api/v1';
+  private serverApp!: http.Server;
 
   constructor() {
     this.app = express();
@@ -19,6 +22,18 @@ class Server {
     this.setRoutes();
 
     connectToDataBase();
+  }
+
+  get getApp() {
+    return this.app;
+  }
+
+  get getApiBase() {
+    return this.apiBase;
+  }
+
+  get getServerApp() {
+    return this.serverApp;
   }
 
   private setMiddlewares(): void {
@@ -34,7 +49,7 @@ class Server {
   }
 
   public run(): void {
-    this.app.listen(this.port, () => {
+    this.serverApp = this.app.listen(this.port, () => {
       /* eslint no-console: "off" */
       console.log(`Server running on port ${this.port}`);
     });

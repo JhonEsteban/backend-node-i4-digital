@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
 
-import statusCode from '../statusCode';
+import statusCode from '../config/statusCode';
 
 const validateFields = (req: Request, res: Response, next: NextFunction) => {
   try {

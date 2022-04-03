@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import { JsonPlaceholderService } from '../services';
 
-import statusCode from '../statusCode';
+import statusCode from '../config/statusCode';
 
 const getAllUsers = async (req: Request, res: Response) => {
   const jsonPlaceholderService = new JsonPlaceholderService();
