@@ -8,11 +8,7 @@ const swaggerConfig = {
     },
     servers: [
       {
-        url: `http://localhost:port/api/v1/docs`,
-        description: 'Url to use in development',
-      },
-      {
-        url: 'https://i4digital-api-technical-test.herokuapp.com/api/v1/docs',
+        url: 'https://i4digital-api-technical-test.herokuapp.com/api/v1',
         description: 'Url to use in production',
       },
     ],
